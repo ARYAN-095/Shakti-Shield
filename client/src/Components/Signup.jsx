@@ -98,7 +98,7 @@ function Signup() {
         <div 
             className="min-h-screen flex items-center justify-center p-4"
             style={{
-                backgroundImage: "url('/bg2.jpeg')",
+                 backgroundImage: `url('/bg4.jpeg')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
             }}
@@ -130,7 +130,7 @@ function Signup() {
                             onClick={() => handleGoogleSignup()}
                         >
                             <img
-                                src="/google.svg"
+                                src="/logo.jpeg"
                                 alt="Google logo"
                                 className="w-6 h-6"
                             />
