@@ -86,15 +86,17 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
 
-import UserRoutes from "./Routes/UserRoutes.js";
-import ContactRoutes from "./Routes/ContactsRoutes.js";
-import ReviewRoutes from "./Routes/ReviewRoutes.js";
-import ProfileRoutes from "./Routes/ProfileRoutes.js";
-import ConnectToDb from "./Utils/ConnectDb.js";
+import UserRoutes from "./Routes/User.Routes.js";
+import ContactRoutes from "./Routes/Contacts.Routes.js";
+import ReviewRoutes from "./Routes/Review.Routes.js";
+import ProfileRoutes from "./Routes/Profile.Routes.js";
+ 
+import ConnectDb from "./config/db.js";
 
 dotenv.config();
 const app = express();
 const _dirname = path.resolve();
+
 
 // Configure CORS to allow only specific origins and credentials
 const corsOptions = {
@@ -112,7 +114,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Connect to the database
-ConnectToDb();
+ 
 
 // Register API routes
 app.use("/api/user", UserRoutes);
@@ -144,6 +146,8 @@ app.use((err, req, res, next) => {
 
 // Start server on specified port
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
+  ConnectDb();
   console.log(`Server started on port ${PORT}`);
 });
