@@ -38,8 +38,6 @@ SmoothScrolling.propTypes = {
   })
 };
 
-SmoothScrolling.defaultProps = {
-  options: {}
-};
+ 
 
 export default SmoothScrolling;

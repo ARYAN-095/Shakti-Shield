@@ -60,8 +60,8 @@ function HeroSection() {
     // Simulate user movement
     const interval = setInterval(() => {
       setUserPosition(prev => ({
-        x: Math.min(95, Math.max(5, prev.x + (Math.random() * 4 - 2)),
-        y: Math.min(85, Math.max(15, prev.y + (Math.random() * 4 - 2))
+        x: Math.min(95, Math.max(5, prev.x + (Math.random() * 4 - 2))),
+        y: Math.min(85, Math.max(15, prev.y + (Math.random() * 4 - 2)))
       }));
     }, 3000);
     
@@ -92,9 +92,17 @@ function HeroSection() {
   };
 
   return (
-    <div className="w-full min-h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-fuchsia-800 to-rose-700">
+    <div className="w-full min-h-screen overflow-hidden relative">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
+        style={{ backgroundImage: "url('/img4.jpeg')" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-fuchsia-800/80 to-rose-700/80"></div>
+      </div>
+
       {/* Animated Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-1">
         {[...Array(12)].map((_, i) => (
           <div 
             key={i}
@@ -204,10 +212,10 @@ function HeroSection() {
                       zIndex: point.type === 'safezone' ? 5 : 10
                     }}
                     onMouseEnter={() => setMapData(prev => 
-                      prev.map(p => p.id === point.id ? { ...p, active: true } : p)
+                      prev.map(p => p.id === point.id ? { ...p, active: true } : p))
                     }
                     onMouseLeave={() => setMapData(prev => 
-                      prev.map(p => p.id === point.id ? {...p, active: false} : p)
+                      prev.map(p => p.id === point.id ? {...p, active: false} : p))
                     }
                   >
                     <div className="text-3xl cursor-pointer transform hover:scale-125 transition-transform">
@@ -294,7 +302,7 @@ function HeroSection() {
         </div>
 
         {/* Empowerment Section */}
-        <div className="bg-gradient-to-r from-purple-800 to-pink-700 rounded-3xl p-8 md:p-12 text-center mb-20 border border-white/20 shadow-2xl animate-fade-in-up">
+        <div className="bg-gradient-to-r from-purple-800/90 to-pink-700/90 rounded-3xl p-8 md:p-12 text-center mb-20 border border-white/20 shadow-2xl animate-fade-in-up">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Join the Safety Revolution</h2>
           <p className="text-xl text-purple-100 max-w-3xl mx-auto mb-8">
             Shakti Shield is building a global community dedicated to creating safer spaces for women everywhere.
@@ -394,6 +402,10 @@ function HeroSection() {
           background-image: 
             linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+        }
+        
+        .floating-shield {
+          animation: floatAnimation 6s ease-in-out infinite;
         }
       `}</style>
     </div>
