@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import SOSButton from '../SOSButton';
+import ShaktiButton from '../Shakti';
 import { Plus, X, CircleX, Shield, MapPin, AlertCircle, UserPlus } from 'lucide-react';
 import BottomNav from './BottomNav';
 import { useForm } from 'react-hook-form';
@@ -146,7 +146,7 @@ function AfterLogin() {
     }
   };
 
-  const handleSOS = async () => {
+  const handleSHAKTI = async () => {
     setShowLoader(true);
     setLocationError(null);
 
@@ -176,7 +176,7 @@ function AfterLogin() {
         </div>
       );
     } catch (error) {
-      console.error('SOS Error:', error);
+      console.error('SHAKTI Error:', error);
       setLocationError(error.message);
       toast.error(
         <div>
@@ -248,28 +248,67 @@ function AfterLogin() {
           </div>
         </div>
 
-        {/* SOS Button Section */}
+        {/* Shakti Button Section */}
         <div className="w-full p-4 flex flex-col items-center justify-center mt-8">
-          <div className="relative w-64 h-64 flex items-center justify-center">
-            {/* Animated rings */}
-            <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"></div>
-            <div className="absolute inset-4 rounded-full bg-red-500/30 animate-ping" style={{ animationDelay: '0.5s' }}></div>
-            <div className="absolute inset-8 rounded-full bg-red-500/40 animate-ping" style={{ animationDelay: '1s' }}></div>
-            
-            {/* SOS Button */}
-            <div 
-              className="relative w-48 h-48 rounded-full bg-gradient-to-br from-red-600 to-red-800 shadow-2xl flex items-center justify-center cursor-pointer transform hover:scale-105 transition-transform duration-300 z-10"
-              onClick={handleSOS}
-            >
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-500 to-red-700 shadow-inner"></div>
-              <span className="text-4xl font-bold text-white tracking-wider">SOS</span>
-            </div>
-          </div>
-          
-          <p className="text-white text-center mt-4 text-sm max-w-xs bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-white/20">
-            Press the SOS button to immediately alert your emergency contacts with your location
-          </p>
+  <div className="relative w-80 h-80 flex items-center justify-center">
+    {/* Empowerment Glow */}
+    <div className="absolute inset-0 rounded-full bg-yellow-400/20 animate-pulse" style={{ animationDuration: '3s' }}></div>
+    
+    {/* Animated Protection Rings */}
+    <div className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"></div>
+    <div className="absolute inset-6 rounded-full bg-red-500/30 animate-ping" style={{ animationDelay: '0.5s' }}></div>
+    <div className="absolute inset-12 rounded-full bg-red-500/40 animate-ping" style={{ animationDelay: '1s' }}></div>
+    
+    {/* Shakti Shield Button */}
+    <div 
+      className="relative w-60 h-60 rounded-full bg-gradient-to-br from-red-600 to-red-800 shadow-2xl flex flex-col items-center justify-center cursor-pointer transform hover:scale-105 transition-transform duration-300 z-10 group"
+      onClick={handleSHAKTI}
+    >
+      {/* Inner glow */}
+      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-red-500 to-red-700 shadow-inner"></div>
+      
+      {/* Shakti Text */}
+      <div className="flex flex-col items-center justify-center relative z-10">
+        <span className="text-5xl font-extrabold text-white tracking-wider leading-none">
+          SHAKTI
+        </span>
+        <div className="mt-2 w-4/5 h-1 bg-yellow-400 rounded-full animate-pulse"></div>
+        <span className="mt-3 text-xl font-bold text-yellow-300 tracking-wider">
+          SHIELD
+        </span>
+      </div>
+      
+      {/* Empowerment Symbol */}
+      <div className="absolute -bottom-4">
+        <div className="bg-gradient-to-r from-purple-600 to-pink-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform group-hover:rotate-12 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
         </div>
+      </div>
+    </div>
+    
+    {/* Protection Shield Outline */}
+    <div className="absolute -inset-4 rounded-full border-4 border-yellow-400/30 transform rotate-12 animate-pulse-slow z-0"></div>
+  </div>
+  
+  {/* Instruction Text */}
+  <p className="text-center text-white text-lg mt-6 max-w-md bg-black/30 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+    Press the SHAKTI SHIELD button to activate emergency protection
+  </p>
+</div>
+
+<style jsx global>{`
+  @keyframes pulse-slow {
+    0% { opacity: 0.5; transform: scale(0.95) rotate(12deg); }
+    50% { opacity: 1; transform: scale(1) rotate(12deg); }
+    100% { opacity: 0.5; transform: scale(0.95) rotate(12deg); }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s infinite;
+  }
+`}</style>
 
         {/* Emergency Contacts Section */}
         <div className="w-full p-4 mt-8">
