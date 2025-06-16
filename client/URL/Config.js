@@ -2,7 +2,7 @@ export const Config = {
   baseUrl: "https://shakti-shield-1.onrender.com/api/user",
   SignUPUrl: "https://shakti-shield-1.onrender.com/api/user/signup",
   LOGINUrl: "https://shakti-shield-1.onrender.com/api/user/login",
-  GoogleClientId: "13737580183-gdeb45qc09v9l4nnc2jiq2una0mudr30.apps.googleusercontent.com",
+  GoogleClientId: "506315914260-l6o84822itl6k1r083h89q6qn1bijnes.apps.googleusercontent.com",
   GoogleSignUpUrl: "https://shakti-shield-1.onrender.com/api/user/googleLogin",
   LogoutUrl: "https://shakti-shield-1.onrender.com/api/user/logout",
   ContactUrl: "https://shakti-shield-1.onrender.com/api/contacts/addcontact",
