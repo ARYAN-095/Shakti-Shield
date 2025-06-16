@@ -1,83 +1,23 @@
-  
-  /**
+/**
  * ==========================================
- * Woman Safety Web App — Express Server
+ * Shakti Shield — Express Server
  * ==========================================
  * 
- * This Express server provides RESTful APIs for:
- *  - User authentication and management (/api/user)
- *  - Emergency contact management (/api/contacts)
- *  - Review system (/api/reviews)
- *  - Profile operations (/api/profile)
+ * REST APIs for:
+ *  - User auth (/api/user)
+ *  - Emergency contacts (/api/contacts)
+ *  - Reviews (/api/reviews)
+ *  - Profile (/api/profile)
  * 
  * Features:
- *  - Environment-based configuration using dotenv
- *  - CORS protection for local dev and production deployment
- *  - Cookie parsing for session or token handling
- *  - JSON + URL-encoded body parsing
- *  - Centralized error handling
- *  - Optional static frontend serving in production
- * 
- * ==========================
- * ENVIRONMENT VARIABLES USED
- * ==========================
- *  PORT                   : Port number to run the server (e.g., 5000)
- *  NODE_ENV               : Environment type (development | production)
- *  CLOUDINARY_CLOUD_NAME   : (Optional) Cloudinary config
- *  CLOUDINARY_API_KEY      : (Optional) Cloudinary config
- *  CLOUDINARY_SECRET       : (Optional) Cloudinary config
+ *  - Env config via dotenv
+ *  - CORS with credentials + restricted origins
+ *  - Cookie & body parsing
+ *  - Central error handler
+ *  - Production static frontend serving
  * 
  * ===================
- * ROUTE STRUCTURE
- * ===================
- *  GET     /                    → Health check endpoint (returns 'hello')
- *  /api/user                     → User routes (login, register, etc.)
- *  /api/contacts                 → Contact routes (add, get, delete emergency contacts)
- *  /api/reviews                  → Review routes (post, get reviews)
- *  /api/profile                  → Profile routes (get/update user profile)
- * 
- * ===================
- * ERROR HANDLING
- * ===================
- *  Any unhandled error will be caught by centralized error handler
- *  - Logs error stack trace
- *  - Responds with 500 status and error message (message visible in development)
- * 
- * ===================
- * FRONTEND INTEGRATION
- * ===================
- *  In production, the server serves static files from:
- *      /frontend/dist/
- *  and handles client-side routing by sending index.html for unknown routes.
- * 
- * ===================
- * CORS CONFIGURATION
- * ===================
- *  - In production: allows requests from https://woman-safety-app.vercel.app
- *  - In development: allows requests from http://localhost:5173, http://127.0.0.1:5173
- *  - Supports credentials (cookies, auth headers)
- * 
- * ===================
- * SETUP
- * ===================
- *  1️⃣ Install dependencies:
- *      npm install
- * 
- *  2️⃣ Create .env file:
- *      PORT=5000
- *      NODE_ENV=development
- *      CLOUDINARY_CLOUD_NAME=your-cloud-name
- *      CLOUDINARY_API_KEY=your-api-key
- *      CLOUDINARY_SECRET=your-secret
- * 
- *  3️⃣ Start server:
- *      NODE_ENV=development node server.js
- * 
- * ===================
- * AUTHOR
- * ===================
- *  © 2025 Aryan Shukla
- * 
+ * © 2025 Aryan Shukla
  */
 
 import express from "express";
@@ -90,64 +30,67 @@ import UserRoutes from "./Routes/User.Routes.js";
 import ContactRoutes from "./Routes/Contacts.Routes.js";
 import ReviewRoutes from "./Routes/Review.Routes.js";
 import ProfileRoutes from "./Routes/Profile.Routes.js";
- 
+
 import ConnectDb from "./config/db.js";
 
 dotenv.config();
 const app = express();
 const _dirname = path.resolve();
 
+// ✅ CORS CONFIG
+const allowedOrigins = process.env.NODE_ENV === "production"
+  ? ["https://shakti-shield.vercel.app"]
+  : ["http://localhost:5173", "http://127.0.0.1:5173"];
 
-// Configure CORS to allow only specific origins and credentials
-const corsOptions = {
-  origin: process.env.NODE_ENV === "production"
-    ? 'https://shakti-shield.vercel.app'
-    : ['http://localhost:5173', 'http://127.0.0.1:5173'],
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl or mobile apps)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("CORS not allowed from this origin: " + origin), false);
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-};
-app.use(cors(corsOptions));
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+}));
 
-// Middleware: parse JSON and url-encoded bodies + cookies
+// ✅ Body + cookie parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Connect to the database
- 
+// ✅ Connect DB
+ConnectDb();
 
-// Register API routes
+// ✅ Routes
 app.use("/api/user", UserRoutes);
 app.use("/api/contacts", ContactRoutes);
 app.use("/api/reviews", ReviewRoutes);
 app.use("/api/profile", ProfileRoutes);
 
-// Health check route
+// ✅ Health check
 app.get("/", (req, res) => {
-  res.send("hello");
+  res.send("Shakti Shield API is running.");
 });
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
+// ✅ Serve frontend in production
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(_dirname, "/frontend/dist")));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
   });
 }
 
-// Global error handler
+// ✅ Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error("Unhandled error:", err.stack);
   res.status(500).json({
     message: "Something went wrong!",
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    error: process.env.NODE_ENV === "development" ? err.message : undefined
   });
 });
 
-// Start server on specified port
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () => {
-  ConnectDb();
-  console.log(`Server started on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
