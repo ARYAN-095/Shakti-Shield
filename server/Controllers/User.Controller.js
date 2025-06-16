@@ -12,9 +12,10 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const Signup = async (req, res) => {
   const { username, email, password } = req.body;
 
-  if (!username || !email || !password) {
-    return res.status(400).json({ message: "Please provide username, email, and password." });
-  }
+  if (!username || !email || !password || typeof email !== "string" || email.trim() === "") {
+  return res.status(400).json({ message: "Please provide a valid username, email, and password." });
+}
+
 
   try {
     const emailExists = await User.findOne({ email });
