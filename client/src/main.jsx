@@ -4,7 +4,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import App from './App.jsx'
 import './index.css'
 import SmoothScrolling from './Components/SmoothScrolling.jsx'
-import { Config } from '../API/Config.js'
+import { Config } from '../URL/Config.js'
 import UserContextProvider from './Context/UserContextProvider.jsx'
 
 

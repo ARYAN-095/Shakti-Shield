@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ShaktiButton from '../Shakti';
+import ShaktiButton from '../ShaktiButton';
 import { Plus, X, CircleX, Shield, MapPin, AlertCircle, UserPlus } from 'lucide-react';
 import BottomNav from './BottomNav';
 import { useForm } from 'react-hook-form';
