@@ -6,7 +6,7 @@ import { Config } from '../../API/Config';
 import { useGoogleLogin } from "@react-oauth/google";
 import { AuthContext } from '../Context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import api from '../../API/CustomApi';
+import api from '../../URL/CustomApi';
 
 function Signup() {
     const [showPassword, setShowPassword] = useState(false);

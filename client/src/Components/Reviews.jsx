@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Search, Plus, Star, Shield, X } from 'lucide-react';
 import BottomNav from './Home/BottomNav';
 import { useForm } from 'react-hook-form';
-import api from '../../API/CustomApi';
+import api from '../../URL/CustomApi';
 import { Config } from '../../API/Config';
 import { AuthContext } from '../Context/AuthContext';
 import Loader from './Home/Loader';

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ChevronLeft, User, Mail, Lock, Shield, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import api from '../../API/CustomApi';
+import api from '../../URL/CustomApi';
 import { Config } from '../../API/Config';
 import { AuthContext } from '../Context/AuthContext';
 
