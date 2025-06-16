@@ -5,7 +5,7 @@ import BottomNav from './BottomNav';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Context/AuthContext';
 import api from '../../../URL/CustomApi';
-import { Config } from '../../../API/Config';
+import { Config } from '../../../URL/Config';
 import Loader from './Loader';
 import axios from 'axios';
 import { toast } from "react-toastify"

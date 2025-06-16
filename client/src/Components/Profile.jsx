@@ -5,7 +5,7 @@ import { useContext, useState } from 'react';
 import BottomNav from './Home/BottomNav';
 import ReviewCard from './ReviewCard';
 import api from '../../URL/CustomApi';
-import { Config } from '../../API/Config';
+import { Config } from '../../URL/Config';
 import { AuthContext } from '../Context/AuthContext';
 
 const ProfileSection = ({ title, children }) => (

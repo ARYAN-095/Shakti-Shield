@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { AuthContext, AuthProvider } from "./AuthContext";
-import api from "../../API/CustomApi";
-import { Config } from "../../API/Config";
+import api from "../../URL/CustomApi";
+import { Config } from "../../URL/Config";
 
 /**
  * AuthContextProvider

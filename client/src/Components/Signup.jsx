@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { FaEye, FaEyeSlash, FaShieldAlt, FaLock, FaUser, FaEnvelope } from 'react-icons/fa';
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Config } from '../../API/Config';
+import { Config } from '../../URL/Config';
 import { useGoogleLogin } from "@react-oauth/google";
 import { AuthContext } from '../Context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
